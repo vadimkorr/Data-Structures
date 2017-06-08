@@ -1,0 +1,185 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Singly_Linked_List
+{
+    class SinglyLinkedList<T>: IEnumerable
+    {
+        private ListItem<T> _head;
+        //TODO: consider this case as well
+        //private ListItem<T> _tail;
+
+        //GET i-th ITEM (STARTING FROM THE FIRST ITEM)
+        public ListItem<T> this[int index]
+        {
+            get
+            {
+                if (_head == null)
+                {
+                    throw new Exception("There are no items in the list ");
+                }
+                ListItem<T> current = _head;
+                int currentIndex = 0;
+                while (current != null && currentIndex != index)
+                {
+                    current = current.Next;
+                    currentIndex++;
+                }
+                if (current != null)
+                {
+                    return current;
+                }
+                else
+                {
+                    throw new Exception(string.Format("There is no item with index {0} in the list", index));
+                }
+            }
+        }
+
+        //ADD ITEM (TO THE END OF THE LIST)
+        public void Add(T value) {
+            if (this._head == null)
+            {
+                _head = new ListItem<T>(value);
+            }
+            else {
+                ListItem<T> li = new ListItem<T>(value);
+                ListItem<T> last = GetLast();
+                last.Next = li;
+            }
+        }
+
+        //GET LAST ELEMENT
+        public ListItem<T> GetLast()
+        {
+            ListItem<T> current = _head;
+            while (current.Next != null)
+            {
+                current = current.Next;
+            }
+            return current;
+        }
+
+        //GET SIZE OF THE LIST
+        public int GetCount()
+        {
+            int count = 0;
+            ListItem<T> current = _head;
+            while (current != null)
+            {
+                count++;
+                current = current.Next;
+            }
+            return count;
+        }
+
+        //GET M-th ITEM STARTING FROM THE LAST ITEM O(n)
+        public ListItem<T> GetMToLastItem(int m)
+        {
+            ListItem<T> current;
+            int i;
+            if (_head == null)
+            {
+                throw new Exception("There are no items in the list");
+            }
+            /* Advance current m elements from beginning,
+            * checking for the end of the list
+            */
+            current = _head;
+            for (i = 0; i < m; i++)
+            {
+                if (current.Next != null)
+                {
+                    current = current.Next;
+                }
+                else
+                {
+                    throw new Exception(string.Format("List contains less than {0} items", m));
+                }
+            }
+            /* Start mBehind at beginning and advance pointers
+             * together until current hits last element
+             */
+            ListItem<T> mBehind = _head;
+            while (current.Next != null)
+            {
+                current = current.Next;
+                mBehind = mBehind.Next;
+            }
+            /* mBehind now points to the element we were
+             * searching for, so return it 
+             */
+            return mBehind;
+        }
+
+        //ITERATE OVER LIST
+        public IEnumerator GetEnumerator()
+        {
+            ListItem<T> current = _head;
+            while (current != null)
+            {
+                yield return current;
+                current = current.Next;
+            }
+        }
+
+        //DELETE ITEM
+        public bool Delete(ListItem<T> item)
+        {
+            if (item == null)
+            {
+                throw new Exception("Null reference at item");
+            }
+            else
+            {
+
+                if (item == _head)
+                {
+                    _head = _head.Next;
+                    return true;
+                }
+
+                ListItem<T> current = _head;
+
+                while (current != null)
+                {
+                    if (current.Next == item)
+                    {
+                        current.Next = item.Next;
+                        return true;
+                    }
+                    current = current.Next;
+                }
+                return false;
+            }
+        }
+
+        //DELETE WHOLE LIST
+        public void DeleteAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        //DELETE HEAD
+        public void DeleteHead()
+        {
+            throw new NotImplementedException();
+        }
+
+        //DELETE TAIL
+        public void DeleteTail()
+        {
+            throw new NotImplementedException();
+        }
+
+        //INSERT AFTER
+        public void InsertAfter(ListItem<T> item, T data)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -8,6 +8,15 @@ namespace Singly_Linked_List
 {
     class Program
     {
+        public static void Show(SinglyLinkedList<string> sll)
+        {
+            foreach (ListItem<string> li in sll)
+            {
+                Console.Write(li.Value + " ");
+            }
+            Console.Write("\n");
+        }
+
         static void Main(string[] args)
         {
 
@@ -24,10 +33,7 @@ namespace Singly_Linked_List
                 }
 
                 //show items
-                foreach (ListItem<string> li in sll)
-                {
-                    Console.Write(li.Value + " ");
-                }
+                Show(sll);
                 Console.WriteLine("\nCount = " + sll.GetCount());
 
                 //get m-th to last item
@@ -38,7 +44,24 @@ namespace Singly_Linked_List
                 {
                     Console.WriteLine(sll[i].Value);
                 }
-                Console.WriteLine(sll[10].Value);
+                //Console.WriteLine(sll[10].Value);//Exception
+
+                Console.WriteLine("===== DELETING =====");
+                //Delete last element
+                ListItem<string> toDelete = sll[9];
+                sll.Delete(toDelete);
+                Show(sll);
+
+                //Delete middle element
+                toDelete = sll[2];
+                sll.Delete(toDelete);
+                Show(sll);
+
+                //Delete head element
+                toDelete = sll[0];
+                sll.Delete(toDelete);
+                Show(sll);
+
 
             }
             catch(Exception e)
