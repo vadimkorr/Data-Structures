@@ -43,17 +43,38 @@ namespace Binary_Search_Tree
         }
 
 
+        /* ------------------------------------------------ */
+        /* |                Traversals                    | */
+        /* ------------------------------------------------ */
+
+        //Depth-first search
+        /// <summary>
+        /// Preorder (Forward) — Performs the operation first on the node itself, then on its left descendants, 
+        /// and finally on its right descendants. In other words,         /// a node is always visited before any of its children.
+        /// </summary>
+        /// <param name="action"></param>
+        public void PreorderUreversal(Action<T> action)
+        {
+            _PreorderUreversal(Root, action);
+        }
+
+        private void _PreorderUreversal(Node<T> root, Action<T> action)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Inorder (Symmetric) - Performs the operation first on the node’s left descendants, then on the node 
+        /// itself, and finally on its right descendants. In other words, 
+        /// the left subtree is visited first, then the node itself, and then the node’s right subtree.
+        /// </summary>
+        /// <param name="action"></param>
         public void InorderTraversal(Action<T> action)
         {
             _InorderTraversal(Root, action);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="root"></param>
-        /// <param name="action"></param>
-        public void _InorderTraversal(Node<T> root, Action<T> action)
+        private void _InorderTraversal(Node<T> root, Action<T> action)
         {
             if (root != null)
             {
@@ -63,6 +84,21 @@ namespace Binary_Search_Tree
             }
         }
 
+        /// <summary>
+        /// Postorder (Reversed) — Performs the operation first on the node’s left descendants, 
+        /// then on the node’s right descendants, and finally on the node itself.
+        /// In other words, a node is always visited after all its children.
+        /// </summary>
+        /// <param name="action"></param>
+        public void PostorderUreversal(Action<T> action)
+        {
+            _PostorderUreversal(Root, action);
+        }
+
+        private void _PostorderUreversal(Node<T> root, Action<T> action)
+        {
+            throw new NotImplementedException();
+        }
 
 
 
