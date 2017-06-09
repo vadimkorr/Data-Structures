@@ -50,17 +50,23 @@ namespace Binary_Search_Tree
         //Depth-first search
         /// <summary>
         /// Preorder (Forward) — Performs the operation first on the node itself, then on its left descendants, 
-        /// and finally on its right descendants. In other words,         /// a node is always visited before any of its children.
+        /// and finally on its right descendants. In other words, 
+        /// a node is always visited before any of its children.
         /// </summary>
         /// <param name="action"></param>
-        public void PreorderUreversal(Action<T> action)
+        public void PreorderTreversal(Action<T> action)
         {
-            _PreorderUreversal(Root, action);
+            _PreorderTreversal(Root, action);
         }
 
-        private void _PreorderUreversal(Node<T> root, Action<T> action)
+        private void _PreorderTreversal(Node<T> root, Action<T> action)
         {
             throw new NotImplementedException();
+        }
+
+        public void PreorderTreversalNonRecursively()
+        {
+
         }
 
         /// <summary>
@@ -90,12 +96,12 @@ namespace Binary_Search_Tree
         /// In other words, a node is always visited after all its children.
         /// </summary>
         /// <param name="action"></param>
-        public void PostorderUreversal(Action<T> action)
+        public void PostorderTreversal(Action<T> action)
         {
-            _PostorderUreversal(Root, action);
+            _PostorderTreversal(Root, action);
         }
 
-        private void _PostorderUreversal(Node<T> root, Action<T> action)
+        private void _PostorderTreversal(Node<T> root, Action<T> action)
         {
             throw new NotImplementedException();
         }
@@ -153,6 +159,16 @@ namespace Binary_Search_Tree
             {
                 return FindNodeRecursively(root.Left, value);
             }
+        }
+
+        /// <summary>
+        /// The height of a tree (binary or not) is defined to be the maximum distance 
+        /// from the root node to any leaf node
+        /// </summary>
+        /// <returns></returns>
+        public int GetHeight()
+        {
+            throw new NotImplementedException();
         }
 
     }
