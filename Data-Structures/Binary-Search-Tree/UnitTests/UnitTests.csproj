@@ -50,6 +50,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GetLowestCommonAncestor.cs" />
+    <Compile Include="TestPostorderTraversal.cs" />
+    <Compile Include="TestPreorderTraversal.cs" />
     <Compile Include="TestInorderTraversal.cs" />
     <Compile Include="TestAdd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

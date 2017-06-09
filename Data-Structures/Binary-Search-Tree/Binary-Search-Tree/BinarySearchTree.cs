@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace Binary_Search_Tree
 {
@@ -52,6 +53,15 @@ namespace Binary_Search_Tree
         /// Preorder (Forward) — Performs the operation first on the node itself, then on its left descendants, 
         /// and finally on its right descendants. In other words, 
         /// a node is always visited before any of its children.
+        /// 
+        /// Here recusion is used. When you first enter the procedure, 
+        /// you print the root node's value. 
+        /// Next, you recursively call the procedure to traverse  the left subtree.
+        /// When you make this recursive call, the calling procedure's state is saved on the stack.
+        /// When the recursive call returns, the calling procedure can pick up where
+        /// it left off.
+        /// 
+        /// Complexity is O(n). Every node is examined once. 
         /// </summary>
         /// <param name="action"></param>
         public void PreorderTreversal(Action<T> action)
@@ -61,18 +71,48 @@ namespace Binary_Search_Tree
 
         private void _PreorderTreversal(Node<T> root, Action<T> action)
         {
-            throw new NotImplementedException();
+            if (root != null)
+            {
+                action(root.Value.Get());
+                _PreorderTreversal(root.Left, action);
+                _PreorderTreversal(root.Right, action);
+            }
         }
 
-        public void PreorderTreversalNonRecursively()
+        /// <summary>
+        /// Because a stack is a LIFO data structure, push the right node onto 
+        /// the stack firstm followed by the left node. 
+        /// Instead of examining the left child explicitly, simply pop the first node
+        /// from the stack, print its value, and push both of its children onto the stack
+        /// in the correct order. If you start the procedure by pushing the root node
+        /// onto the stack and then pop, print, and push as described.
+        /// 
+        /// Complexity is O(n). Each node is examined only once and pushed on the stack only once
+        /// </summary>
+        public void PreorderTreversalNonRecursively(Action<T> action)
         {
+            Stack stack = new Stack();
+            if (Root != null)
+                stack.Push(Root);
+            else
+                return;
 
+            while (stack.Count != 0)
+            {
+                Node<T> currNode = stack.Pop() as Node<T>;
+                action(currNode.Value.Get());
+
+                if (currNode.Right != null) stack.Push(currNode.Right);
+                if (currNode.Left != null) stack.Push(currNode.Left);
+            }
         }
 
         /// <summary>
         /// Inorder (Symmetric) - Performs the operation first on the node’s left descendants, then on the node 
         /// itself, and finally on its right descendants. In other words, 
         /// the left subtree is visited first, then the node itself, and then the node’s right subtree.
+        /// 
+        /// Complexity is O(n). Every node is examined once.
         /// </summary>
         /// <param name="action"></param>
         public void InorderTraversal(Action<T> action)
@@ -94,6 +134,8 @@ namespace Binary_Search_Tree
         /// Postorder (Reversed) — Performs the operation first on the node’s left descendants, 
         /// then on the node’s right descendants, and finally on the node itself.
         /// In other words, a node is always visited after all its children.
+        /// 
+        /// Complexity is O(n). Every node is examined once.
         /// </summary>
         /// <param name="action"></param>
         public void PostorderTreversal(Action<T> action)
@@ -103,11 +145,45 @@ namespace Binary_Search_Tree
 
         private void _PostorderTreversal(Node<T> root, Action<T> action)
         {
-            throw new NotImplementedException();
+            if (root != null)
+            {
+                _PostorderTreversal(root.Left, action);
+                _PostorderTreversal(root.Right, action);
+                action(root.Value.Get());
+            }
         }
 
+        /// <summary>
+        /// Problem. Given the value of two nodes in a binary search tree, 
+        /// find the lowest (nearest) common ancestor.
+        /// You may assume that both values already exist in the tree.
+        /// 
+        /// Solution. When your target values are both less than the current node, you go left. 
+        /// When they are both greater, you go right.The first node you encounter 
+        /// that is between your target values is the lowest common ancestor.
+        /// 
+        /// Complexity is O(log(n)). You travel down a path to the lowest common ancestor. 
+        /// Recall that traveling a path to any one node takes O(log(n)).
+        /// </summary>
+        public Node<T> GetLowestCommonAncestor(T value1, T value2)
+        {
+            Node<T> root = this.Root;
+            while (root != null)
+            {
+                Interfaces.IComparable<T> value = root.Value;
 
-
+                if (value.IsGraterThan(value1) && value.IsGraterThan(value2))
+                    root = root.Left;
+                else
+                {
+                    if (value.IsLessThan(value1) && value.IsLessThan(value2))
+                        root = root.Right;
+                    else
+                        return root;
+                }
+            }
+            return null; //only if empty tree
+        }
 
         /// <summary>
         /// 
