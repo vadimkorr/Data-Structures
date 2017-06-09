@@ -12,14 +12,14 @@ namespace UnitTests
         [TestInitialize]
         public void Init()
         {
-            bst = new BinarySearchTree<int>();
+            bst = Utils.GetNewTree();
         }
 
         [TestMethod]
         public void AddInEmptyTree()
         {
             int valueToAdd = 5;
-            bst.InsertNodeRecursively(new ComparableValue(valueToAdd));
+            bst.InsertNode(new ComparableValue(valueToAdd));
             Assert.AreEqual(bst.Root.Value.Get(), valueToAdd);
         }
 
@@ -27,11 +27,11 @@ namespace UnitTests
         public void AddLessThan()
         {
             int valueToAdd = 5;
-            bst.InsertNodeRecursively(new ComparableValue(valueToAdd));
+            bst.InsertNode(new ComparableValue(valueToAdd));
             Assert.AreEqual(bst.Root.Value.Get(), valueToAdd);
 
             int lessThanValueToAdd = 3;
-            bst.InsertNodeRecursively(new ComparableValue(lessThanValueToAdd));
+            bst.InsertNode(new ComparableValue(lessThanValueToAdd));
             Assert.AreEqual(bst.Root.Value.Get(), valueToAdd);
         }
 
@@ -39,11 +39,11 @@ namespace UnitTests
         public void AddGraterThan()
         {
             int valueToAdd = 5;
-            bst.InsertNodeRecursively(new ComparableValue(valueToAdd));
+            bst.InsertNode(new ComparableValue(valueToAdd));
             Assert.AreEqual(bst.Root.Value.Get(), valueToAdd);
 
             int graterThanValueToAdd = 10;
-            bst.InsertNodeRecursively(new ComparableValue(graterThanValueToAdd));
+            bst.InsertNode(new ComparableValue(graterThanValueToAdd));
             Assert.AreEqual(bst.Root.Value.Get(), valueToAdd);
         }
 

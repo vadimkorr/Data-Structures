@@ -15,7 +15,7 @@ namespace UnitTests
         [TestInitialize]
         public void Init()
         {
-            bst = new BinarySearchTree<int>();
+            bst = Utils.GetNewTree();
         }
 
         [TestMethod]
@@ -26,13 +26,13 @@ namespace UnitTests
             
             //add elements to the tree
             foreach (int value in input)
-                bst.InsertNodeRecursively(new ComparableValue(value));
+                bst.InsertNode(new ComparableValue(value));
 
             //traverse
             List<int> actualOutput = new List<int>();
             bst.InorderTraversal((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
@@ -57,13 +57,13 @@ namespace UnitTests
 
             //add elements to the tree
             foreach (int value in input)
-                bst.InsertNodeRecursively(new ComparableValue(value));
+                bst.InsertNode(new ComparableValue(value));
 
             //traverse
             List<int> actualOutput = new List<int>();
             bst.InorderTraversal((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check

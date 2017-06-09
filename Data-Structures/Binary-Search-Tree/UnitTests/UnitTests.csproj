@@ -51,11 +51,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="GetLowestCommonAncestor.cs" />
+    <Compile Include="TestToMinHeap.cs" />
     <Compile Include="TestPostorderTraversal.cs" />
     <Compile Include="TestPreorderTraversal.cs" />
     <Compile Include="TestInorderTraversal.cs" />
     <Compile Include="TestAdd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Binary-Search-Tree\Binary-Search-Tree.csproj">

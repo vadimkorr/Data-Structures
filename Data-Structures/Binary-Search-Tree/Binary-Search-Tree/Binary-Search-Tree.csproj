@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="ExtraModels\CompableValue.cs" />
+    <Compile Include="Helpers\Comparer.cs" />
     <Compile Include="Interfaces\ICompable.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Program.cs" />

@@ -15,39 +15,100 @@ namespace Binary_Search_Tree
     /// </summary> 
     public class BinarySearchTree<T>
     {
-        public Node<T> Root { get; private set; }
-        public bool InsertNodeRecursively(Interfaces.IComparable<T> value)
+        public Node<T> Root { get; set; }
+        //public delegate Interfaces.IComparable<T> _NodeValueBuilderDelegate(T value);
+        //private _NodeValueBuilderDelegate _NodeValueBuilder;
+
+        /* ---------------------------------------------------------- */
+        /* |                     Constructors                       | */
+        /* ---------------------------------------------------------- */
+        public BinarySearchTree(/*_NodeValueBuilderDelegate builder*/)
         {
-            this.Root = _InsertNodeRecursively(this.Root, value);
-            return true;
+            //_NodeValueBuilder = builder;
         }
 
-        private Node<T> _InsertNodeRecursively(Node<T> root, Interfaces.IComparable<T> value)
+        /* ---------------------------------------------------------- */
+        /* |                    Base functions                      | */
+        /* ---------------------------------------------------------- */
+        private Node<T> _InsertNode(Node<T> root, Interfaces.IComparable<T> value)
         {
             //place for adding was found
             if (root == null)
                 root = new Node<T>(null, null, value);
             else
                 if (value.IsLessThan(root.Value.Get()))
-                    root.Left = _InsertNodeRecursively(root.Left, value);
-                else
+                root.Left = _InsertNode(root.Left, value);
+            else
                     if (value.IsGraterThan(root.Value.Get()))
-                        root.Right = _InsertNodeRecursively(root.Right, value);
-                    else
-                        root.Inc();
+                root.Right = _InsertNode(root.Right, value);
+            else
+                root.Inc();
+            return root;
+        }
+        public bool InsertNode(Interfaces.IComparable<T> value)
+        {
+            this.Root = _InsertNode(this.Root, value);
+            return true;
+        }
+        public Node<T> InsertNodeNonRecursively(Node<T> root, Interfaces.IComparable<T> value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Node<T> FindNode(Node<T> root, T value)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+            if (root.Value.IsEq(value))
+            {
+                return root;
+            }
+            if (root.Value.IsLessThan(value))
+            {
+                return FindNode(root.Right, value);
+            }
+            else
+            {
+                return FindNode(root.Left, value);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Node<T> FindNodeNonRecursively(Node<T> root, T value)
+        {
+            while (root != null)
+            {
+                if (root.Value.IsEq(value))
+                {
+                    break;
+                }
+                if (root.Value.IsLessThan(value))
+                {
+                    root = root.Right;
+                }
+                else
+                {
+                    root = root.Left;
+                }
+            }
             return root;
         }
 
-        public Node<T> AddNonNodeRecursively(Node<T> root, Interfaces.IComparable<T> value)
-        {
-            throw new System.NotImplementedException();
-        }
-
-
-        /* ------------------------------------------------ */
-        /* |                Traversals                    | */
-        /* ------------------------------------------------ */
-
+        /* ---------------------------------------------------------- */
+        /* |                      Traversals                        | */
+        /* ---------------------------------------------------------- */
         //Depth-first search
         /// <summary>
         /// Preorder (Forward) — Performs the operation first on the node itself, then on its left descendants, 
@@ -64,19 +125,18 @@ namespace Binary_Search_Tree
         /// Complexity is O(n). Every node is examined once. 
         /// </summary>
         /// <param name="action"></param>
-        public void PreorderTreversal(Action<T> action)
-        {
-            _PreorderTreversal(Root, action);
-        }
-
-        private void _PreorderTreversal(Node<T> root, Action<T> action)
+        private void _PreorderTreversal(Node<T> root, Action<Node<T>> action)
         {
             if (root != null)
             {
-                action(root.Value.Get());
+                action(root);
                 _PreorderTreversal(root.Left, action);
                 _PreorderTreversal(root.Right, action);
             }
+        }
+        public void PreorderTreversal(Action<Interfaces.IComparable<T>> action)
+        {
+            _PreorderTreversal(Root, (node) => { action(node.Value); });
         }
 
         /// <summary>
@@ -89,7 +149,7 @@ namespace Binary_Search_Tree
         /// 
         /// Complexity is O(n). Each node is examined only once and pushed on the stack only once
         /// </summary>
-        public void PreorderTreversalNonRecursively(Action<T> action)
+        public void PreorderTreversalNonRecursively(Action<Interfaces.IComparable<T>> action)
         {
             Stack stack = new Stack();
             if (Root != null)
@@ -100,7 +160,7 @@ namespace Binary_Search_Tree
             while (stack.Count != 0)
             {
                 Node<T> currNode = stack.Pop() as Node<T>;
-                action(currNode.Value.Get());
+                action(currNode.Value);
 
                 if (currNode.Right != null) stack.Push(currNode.Right);
                 if (currNode.Left != null) stack.Push(currNode.Left);
@@ -115,19 +175,18 @@ namespace Binary_Search_Tree
         /// Complexity is O(n). Every node is examined once.
         /// </summary>
         /// <param name="action"></param>
-        public void InorderTraversal(Action<T> action)
-        {
-            _InorderTraversal(Root, action);
-        }
-
-        private void _InorderTraversal(Node<T> root, Action<T> action)
+        private void _InorderTraversal(Node<T> root, Action<Interfaces.IComparable<T>> action)
         {
             if (root != null)
             {
                 _InorderTraversal(root.Left, action);
-                action(root.Value.Get());
+                action(root.Value);
                 _InorderTraversal(root.Right, action);
             }
+        }
+        public void InorderTraversal(Action<Interfaces.IComparable<T>> action)
+        {
+            _InorderTraversal(Root, action);
         }
 
         /// <summary>
@@ -138,21 +197,60 @@ namespace Binary_Search_Tree
         /// Complexity is O(n). Every node is examined once.
         /// </summary>
         /// <param name="action"></param>
-        public void PostorderTreversal(Action<T> action)
-        {
-            _PostorderTreversal(Root, action);
-        }
-
-        private void _PostorderTreversal(Node<T> root, Action<T> action)
+        private void _PostorderTreversal(Node<T> root, Action<Interfaces.IComparable<T>> action)
         {
             if (root != null)
             {
                 _PostorderTreversal(root.Left, action);
                 _PostorderTreversal(root.Right, action);
-                action(root.Value.Get());
+                action(root.Value);
             }
         }
+        public void PostorderTreversal(Action<Interfaces.IComparable<T>> action)
+        {
+            _PostorderTreversal(Root, action);
+        }
 
+        /* ---------------------------------------------------------- */
+        /* |                      Converters                        | */
+        /* ---------------------------------------------------------- */
+        /// <summary>
+        /// Problem. You are given a set of integers in an unordered binary tree. 
+        /// Use an array sorting routine to transform the tree into a heap
+        /// that uses a balanced binary tree as its underlying data structure.
+        /// 
+        /// Complexity of array sort is O(n log(n)).
+        /// </summary>
+        public Node<T> ToMinHeap()
+        {
+            Node<T>[] arr = ToArray();
+            Array.Sort(arr, new Helpers.Comparer<T>());
+
+            Node<T> root = arr.Length > 0 ? arr[0] : null;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int left = 2 * i + 1;
+                int right = left + 1;
+                arr[i].Left = left >= arr.Length ? null : arr[left];
+                arr[i].Right = right >= arr.Length ? null : arr[right];
+            }
+            return root;
+        }
+
+        public Node<T>[] ToArray()
+        {
+            int size = Size();
+            Node<T>[] arr = new Node<T>[size];
+            int index = 0;
+            _PreorderTreversalNodes((node) => {
+                arr[index++] = node;
+            });
+            return arr;
+        }
+
+        /* ---------------------------------------------------------- */
+        /* |                   Extra functions                      | */
+        /* ---------------------------------------------------------- */
         /// <summary>
         /// Problem. Given the value of two nodes in a binary search tree, 
         /// find the lowest (nearest) common ancestor.
@@ -185,56 +283,11 @@ namespace Binary_Search_Tree
             return null; //only if empty tree
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="root"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public Node<T> FindNodeNonRecursively(Node<T> root, T value)
+        public int Size()
         {
-            while (root != null)
-            {
-                if (root.Value.IsEq(value))
-                {
-                    break;
-                }
-                if (root.Value.IsLessThan(value))
-                {
-                    root = root.Right;
-                }
-                else
-                {
-                    root = root.Left;
-                }
-            }
-            return root;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="root"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public Node<T> FindNodeRecursively(Node<T> root, T value)
-        {
-            if (root == null)
-            {
-                return null;
-            }
-            if (root.Value.IsEq(value))
-            {
-                return root;
-            }
-            if (root.Value.IsLessThan(value))
-            {
-                return FindNodeRecursively(root.Right, value);
-            }
-            else
-            {
-                return FindNodeRecursively(root.Left, value);
-            }
+            int count = 0;
+            PreorderTreversal((value) => { count++; });
+            return count;
         }
 
         /// <summary>
@@ -247,5 +300,10 @@ namespace Binary_Search_Tree
             throw new NotImplementedException();
         }
 
+        //Helper function returning node to action instead of just value
+        private void _PreorderTreversalNodes(Action<Node<T>> action)
+        {
+            _PreorderTreversal(Root, action);
+        }
     }
 }

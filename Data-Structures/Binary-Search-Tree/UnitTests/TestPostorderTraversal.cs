@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Binary_Search_Tree;
+﻿using Binary_Search_Tree;
 using Binary_Search_Tree.ExtraModels;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UnitTests
 {
@@ -15,7 +14,7 @@ namespace UnitTests
         [TestInitialize]
         public void Init()
         {
-            bst = new BinarySearchTree<int>();
+            bst = Utils.GetNewTree();
         }
 
         [TestMethod]
@@ -26,13 +25,13 @@ namespace UnitTests
             //add elements to the tree
             List<int> input3Elements = new List<int>() { 20, 30, 10 };
             foreach (int value in input3Elements)
-                bst.InsertNodeRecursively(new ComparableValue(value));
+                bst.InsertNode(new ComparableValue(value));
 
             //traverse
             List<int> actualOutput = new List<int>();
             bst.PostorderTreversal((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
@@ -49,13 +48,13 @@ namespace UnitTests
             //add elements to the tree
             List<int> input10Elements = new List<int>() { 5, 3, 8, 1, 4, 0, 2, 9, 7, 6 };
             foreach (int value in input10Elements)
-                bst.InsertNodeRecursively(new ComparableValue(value));
+                bst.InsertNode(new ComparableValue(value));
 
             //traverse
             List<int> actualOutput = new List<int>();
             bst.PostorderTreversal((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
@@ -72,13 +71,13 @@ namespace UnitTests
 
             //add elements to the tree
             foreach (int value in input0Elements)
-                bst.InsertNodeRecursively(new ComparableValue(value));
+                bst.InsertNode(new ComparableValue(value));
 
             //traverse
             List<int> actualOutput = new List<int>();
             bst.PostorderTreversal((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check

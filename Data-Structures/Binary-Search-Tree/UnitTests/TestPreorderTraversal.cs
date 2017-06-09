@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Binary_Search_Tree;
+﻿using Binary_Search_Tree;
 using Binary_Search_Tree.ExtraModels;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UnitTests
 {
@@ -11,6 +10,12 @@ namespace UnitTests
     public class TestPreorderTraversal
     {
         BinarySearchTree<int> bst;
+
+        [TestInitialize]
+        public void Init()
+        {
+            bst = Utils.GetNewTree();
+        }
 
         //0 elements
         static List<int> input0Elements = new List<int>() { };
@@ -27,13 +32,7 @@ namespace UnitTests
         private void _PopulateTree(List<int> input)
         {
             foreach (int value in input)
-                bst.InsertNodeRecursively(new ComparableValue(value));
-        }
-
-        [TestInitialize]
-        public void Init()
-        {
-            bst = new BinarySearchTree<int>();
+                bst.InsertNode(new ComparableValue(value));
         }
 
         [TestMethod]
@@ -46,7 +45,7 @@ namespace UnitTests
             List<int> actualOutput = new List<int>();
             bst.PreorderTreversal((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
@@ -63,7 +62,7 @@ namespace UnitTests
             List<int> actualOutput = new List<int>();
             bst.PreorderTreversalNonRecursively((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
@@ -80,7 +79,7 @@ namespace UnitTests
             List<int> actualOutput = new List<int>();
             bst.PreorderTreversal((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
@@ -99,7 +98,7 @@ namespace UnitTests
             List<int> actualOutput = new List<int>();
             bst.PreorderTreversalNonRecursively((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
@@ -118,7 +117,7 @@ namespace UnitTests
             List<int> actualOutput = new List<int>();
             bst.PreorderTreversal((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
@@ -137,7 +136,7 @@ namespace UnitTests
             List<int> actualOutput = new List<int>();
             bst.PreorderTreversalNonRecursively((value) => {
                 Console.Write(value + " ");
-                actualOutput.Add(value);
+                actualOutput.Add(value.Get());
             });
 
             //check
