@@ -50,7 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="GetLowestCommonAncestor.cs" />
+    <Compile Include="TestRightRotate.cs" />
+    <Compile Include="TestGetLowestCommonAncestor.cs" />
     <Compile Include="TestToMinHeap.cs" />
     <Compile Include="TestPostorderTraversal.cs" />
     <Compile Include="TestPreorderTraversal.cs" />

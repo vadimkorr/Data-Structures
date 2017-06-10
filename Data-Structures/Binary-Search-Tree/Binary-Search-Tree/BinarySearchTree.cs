@@ -305,5 +305,24 @@ namespace Binary_Search_Tree
         {
             _PreorderTreversal(Root, action);
         }
+
+        /// <summary>
+        /// #Problem. Given an unbalanced binary search tree 
+        /// with more nodes in the left subtree than the right, 
+        /// reorganize the tree to improve its balance while maintaining 
+        /// the properties of a binary search tree
+        /// 
+        /// Complexity is O(1). Performs a fixed number of operations 
+        /// regardless of the size of the tree
+        /// </summary>
+        public Node<T> RightRotate()
+        {
+            if (Root == null || Root.Left == null)
+                throw new Exception("Node is null");
+            Node<T> newRoot = Root.Left;
+            Root.Left = newRoot.Right;
+            newRoot.Right = Root;
+            return newRoot;
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace UnitTests
 {
     [TestClass]
-    public class GetLowestCommonAncestor
+    public class TestGetLowestCommonAncestor
     {
         BinarySearchTree<int> bst;
 
