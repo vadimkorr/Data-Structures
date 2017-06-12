@@ -8,6 +8,21 @@ namespace Remove_Chars
 {
     public class Solution
     {
+        /// <summary>
+        /// Problem. Write an efficient function that deletes characters from an ASCII
+        /// string. Use the prototype:
+        /// string removeChars(string str, string remove);
+        /// where any character existing in remove must be deleted from str. 
+        /// 
+        /// Complexity is O(n+m). The number of characters in the ASCII character set
+        /// is fixed, zeroing the array is constant time. You perform a constant time 
+        /// assignment for each character in remove, so building the lookup array is O(m).
+        /// Finally, you do at most one constant time lookup and one constant time copy 
+        /// for each character in str, giving O(n) for this stage. Summing these parts         /// yields O(n + m), so the algorithm has linear running time.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="remove"></param>
+        /// <returns></returns>
         public static string RemoveChars(string str, string remove)
         {
             char[] s = str.ToArray();
@@ -24,6 +39,6 @@ namespace Remove_Chars
                 if (!flags[s[i]])
                     s[dst++] = s[i];
             return new string(s, 0, dst);
-        }
+        }
     }
 }

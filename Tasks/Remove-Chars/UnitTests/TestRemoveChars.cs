@@ -5,7 +5,7 @@ using Remove_Chars;
 namespace UnitTests
 {
     [TestClass]
-    public class TestRemoveChar
+    public class TestRemoveChars
     {
         [TestMethod]
         public void RemoveCharIfOk()

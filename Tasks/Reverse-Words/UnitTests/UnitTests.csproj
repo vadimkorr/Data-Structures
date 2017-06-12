@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7C54F97B-7DCC-4554-BFE4-BDD1D463DC6D}</ProjectGuid>
+    <ProjectGuid>{202AF119-2F1B-4A51-BB89-E991DD3D7924}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UnitTests</RootNamespace>
@@ -48,16 +48,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestRemoveChars.cs" />
+    <Compile Include="TestReverseWords.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Remove-Chars\Remove-Chars.csproj">
-      <Project>{443deb9b-f456-4fcd-9149-78a0dd2a87e0}</Project>
-      <Name>Remove-Chars</Name>
+    <ProjectReference Include="..\Reverse-Words\Reverse-Words.csproj">
+      <Project>{59dd287c-e7d8-4ad0-b601-fe159b709782}</Project>
+      <Name>Reverse-Words</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
