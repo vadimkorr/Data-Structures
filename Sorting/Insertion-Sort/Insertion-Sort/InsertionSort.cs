@@ -12,7 +12,7 @@ namespace Insertion_Sort
     /// by comparing each new element to the already-sorted elements 
     /// and inserting the new element into the correct location,     /// similar to the way you sort a hand of playing cards.
     /// 
-    /// Complexity is:  best-case - O(n) which occurs when the list is already sorted.
+    /// Complexity is: best-case - O(n) which occurs when the list is already sorted.
     /// The average and worst cases are both O(n^2).
     /// </summary>
     public class InsertionSort
