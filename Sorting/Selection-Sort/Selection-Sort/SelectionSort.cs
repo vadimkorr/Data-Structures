@@ -16,6 +16,8 @@ namespace Selection_Sort
     /// The description of this algorithm suggests a recursive approach.
     /// 
     /// Complexity is O(n^2) in the best, average, and worst cases.
+    /// 
+    /// In-place, not stable
     /// </summary>
     public class SelectionSort
     {

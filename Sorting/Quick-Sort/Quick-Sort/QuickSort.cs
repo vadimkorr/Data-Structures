@@ -16,6 +16,8 @@ namespace Quick_Sort
     /// Complexity is: best case and avg: O(n log(n)) - performing log(n) operations on each of n elements 
     /// yields a combined best case complexity.
     /// Worst-case complexity of O(n^2) - pivot is poor - minimum value of data set
+    /// 
+    /// Not stable
     /// </summary>
     public class QuickSort
     {

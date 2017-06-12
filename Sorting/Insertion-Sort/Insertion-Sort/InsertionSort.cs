@@ -10,10 +10,13 @@ namespace Insertion_Sort
     /// Insertion sort is another simple sorting algorithm.
     /// It builds a sorted array (or list) one element at a time 
     /// by comparing each new element to the already-sorted elements 
-    /// and inserting the new element into the correct location,     /// similar to the way you sort a hand of playing cards.
+    /// and inserting the new element into the correct location, 
+    /// similar to the way you sort a hand of playing cards.
     /// 
     /// Complexity is: best-case - O(n) which occurs when the list is already sorted.
     /// The average and worst cases are both O(n^2).
+    /// 
+    /// Stable, in-place
     /// </summary>
     public class InsertionSort
     {

@@ -10,7 +10,8 @@ namespace Merge_Sort
     /// Merge sort is another divide-and-conquer algorithm that works 
     /// by splitting a data set into two or more subsets,     /// sorting the subsets, and then merging them together into the nal sorted set.
     /// 
-    /// Complexity is 
+    /// Complexity is O(n log(n)) - the best, average, and worst-case.
+    /// Stable, not in-place
     /// </summary>
     public class MergeSort
     {
